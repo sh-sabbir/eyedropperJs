@@ -1,0 +1,66 @@
+<html>
+    <head>
+
+        <!--script>var exports = {"__esModule": true};</script>
+        <script type="module" src="edropper2.js"></script -->
+        <script type="module" src="edropper2.js"></script>
+        <style>
+            #v{
+                position: absolute;
+                height: 100vh;
+                width: 100vw;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: -1;
+            }
+
+            #i {
+                opacity: 0;
+                position: absolute;
+                height: 100vh;
+                width: 100vw;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 11;
+            }
+
+            #v {
+            border: 1px solid blue;
+            }
+
+            #i {
+            border: 1px solid green;
+            }
+        </style>
+    </head>
+<body>
+<img src="fav.png"/>
+<video id="v" autoplay></video>
+<button id="cp">Capture</button>
+<img id="i" src="//:0" />
+<script type="module">
+    import  page  from './edropper2.js';
+
+    let v = document.getElementById("v");
+    v.innerWidth = window.innerWidth;
+    v.innerHeight = window.innerHeight;
+
+    navigator.mediaDevices.getDisplayMedia({
+        audio: false
+    }).then((r) => {
+        console.log(r);
+        v.srcObject = r;
+    }).catch((e) => {
+        console.log("this must be run in a secure context. Stack snippets (rightfully) refuse to run this.");
+    });
+
+    //var button = document.getElementsByTagName("body");
+    document.addEventListener("click", handleClick);
+    function handleClick() {
+        page.dropperActivate();
+    }
+</script>
+</body>
+</html>
